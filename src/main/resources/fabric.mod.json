@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "lotus",
+  "version": "${version}",
+  "name": "Lotus",
+  "description": "Data factory for effective adding of default resources from Java",
+  "authors": [
+    "magistermaks"
+  ],
+  "contact": {
+    "website": "darktree.net",
+    "repo": "https://github.com/magistermaks/mod-lotus"
+  },
+  "license": "MIT",
+  "icon": "assets/lotus/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+    ],
+    "main": [
+      "net.darktree.lotus.Lotus"
+    ]
+  },
+  "mixins": [
+    "lotus.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": "*",
+    "minecraft": "1.18.1"
+  }
+}
