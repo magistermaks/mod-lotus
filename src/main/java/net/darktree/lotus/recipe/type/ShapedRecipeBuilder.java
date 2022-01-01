@@ -6,7 +6,6 @@ import com.google.gson.JsonObject;
 import net.darktree.lotus.recipe.RecipeBuilder;
 import net.darktree.lotus.recipe.RecipeOutput;
 import net.minecraft.item.Item;
-import net.minecraft.util.registry.Registry;
 
 public class ShapedRecipeBuilder extends RecipeBuilder {
 

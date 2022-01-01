@@ -1,10 +1,10 @@
 package net.darktree.lotus.factory;
 
 import net.darktree.lotus.factory.builder.BlockBuilder;
-import net.darktree.lotus.factory.builder.ItemBuilder;
-import net.darktree.lotus.factory.builder.provider.BuilderProvider;
 import net.darktree.lotus.factory.builder.Group;
+import net.darktree.lotus.factory.builder.ItemBuilder;
 import net.darktree.lotus.factory.builder.RootGroup;
+import net.darktree.lotus.factory.builder.provider.BuilderProvider;
 
 public class Factory implements BuilderProvider {
 
