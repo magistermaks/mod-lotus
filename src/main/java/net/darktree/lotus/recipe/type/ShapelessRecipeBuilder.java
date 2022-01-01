@@ -4,10 +4,11 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.darktree.lotus.recipe.RecipeOutput;
 import net.minecraft.item.Item;
+import org.apache.commons.lang3.mutable.MutableObject;
 
 public class ShapelessRecipeBuilder extends IngredientsRecipeBuilder {
 
-	public ShapelessRecipeBuilder(RecipeOutput output, Item[] ingredients) {
+	public ShapelessRecipeBuilder(MutableObject<RecipeOutput> output, Item[] ingredients) {
 		super(output);
 		this.addAllIngredients(ingredients);
 	}

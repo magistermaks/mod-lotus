@@ -2,6 +2,7 @@ package net.darktree.lotus.recipe;
 
 import com.google.gson.JsonObject;
 import net.minecraft.item.Item;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class RecipeOutput {
@@ -22,6 +23,10 @@ public class RecipeOutput {
 		if(this.count >= 1) {
 			throw new RuntimeException("Invalid output count, must be >= 1");
 		}
+	}
+
+	public Identifier id() {
+		return new Identifier(this.item);
 	}
 
 	static RecipeOutput of(Item item, int count, String group) {
@@ -46,5 +51,4 @@ public class RecipeOutput {
 			recipe.addProperty("count", this.count);
 		}
 	}
-
 }

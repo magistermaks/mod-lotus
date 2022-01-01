@@ -6,13 +6,14 @@ import com.google.gson.JsonObject;
 import net.darktree.lotus.recipe.RecipeBuilder;
 import net.darktree.lotus.recipe.RecipeOutput;
 import net.minecraft.item.Item;
+import org.apache.commons.lang3.mutable.MutableObject;
 
 public class ShapedRecipeBuilder extends RecipeBuilder {
 
 	private final JsonArray pattern = new JsonArray();
 	private KeyBuilder keys = new KeyBuilder();
 
-	public ShapedRecipeBuilder(RecipeOutput output, String pattern) {
+	public ShapedRecipeBuilder(MutableObject<RecipeOutput> output, String pattern) {
 		super(output);
 
 		for( String line : pattern.split(",") ){

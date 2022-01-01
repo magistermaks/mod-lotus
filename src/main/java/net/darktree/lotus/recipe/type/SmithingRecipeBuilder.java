@@ -5,14 +5,14 @@ import com.google.gson.JsonObject;
 import net.darktree.lotus.recipe.RecipeBuilder;
 import net.darktree.lotus.recipe.RecipeOutput;
 import net.minecraft.item.Item;
-import org.jetbrains.annotations.Nullable;
+import org.apache.commons.lang3.mutable.MutableObject;
 
 public class SmithingRecipeBuilder extends RecipeBuilder {
 
 	JsonObject base;
 	JsonObject addition;
 
-	public SmithingRecipeBuilder(@Nullable RecipeOutput output) {
+	public SmithingRecipeBuilder(MutableObject<RecipeOutput> output) {
 		super(output);
 	}
 

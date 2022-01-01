@@ -4,7 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.darktree.lotus.recipe.RecipeOutput;
 import net.minecraft.item.Item;
-import org.jetbrains.annotations.Nullable;
+import org.apache.commons.lang3.mutable.MutableObject;
 
 public class SmeltingRecipeBuilder extends IngredientRecipeBuilder {
 
@@ -12,7 +12,7 @@ public class SmeltingRecipeBuilder extends IngredientRecipeBuilder {
 	int time;
 	double experience = 0.35;
 
-	public SmeltingRecipeBuilder(@Nullable RecipeOutput output, FurnaceType type, Item[] items) {
+	public SmeltingRecipeBuilder(MutableObject<RecipeOutput> output, FurnaceType type, Item[] items) {
 		super(output);
 		this.type = type.type;
 		this.time = type.time;

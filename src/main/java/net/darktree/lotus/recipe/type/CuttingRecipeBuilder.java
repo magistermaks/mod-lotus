@@ -4,11 +4,11 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.darktree.lotus.recipe.RecipeOutput;
 import net.minecraft.item.Item;
-import org.jetbrains.annotations.Nullable;
+import org.apache.commons.lang3.mutable.MutableObject;
 
 public class CuttingRecipeBuilder extends IngredientRecipeBuilder {
 
-	public CuttingRecipeBuilder(@Nullable RecipeOutput output, Item[] items) {
+	public CuttingRecipeBuilder(MutableObject<RecipeOutput> output, Item[] items) {
 		super(output);
 
 		for( Item item : items ) {

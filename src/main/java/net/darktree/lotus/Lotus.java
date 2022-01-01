@@ -19,7 +19,9 @@ public class Lotus implements ModInitializer {
 
 		FACTORY.block("test_block").of(TestBlock::new).item().drop(Items.DIRT).get();
 		Recipe.of(Items.STONE).shapeless(Items.DIRT).add();
-		Recipe.of(Items.WARPED_BUTTON).shapeless().any(Items.DIRT, Items.COARSE_DIRT).add();
+		Recipe.of(Items.DIAMOND).shapeless().any(Items.DIRT, Items.COARSE_DIRT).add();
+
+		Recipe.of(Items.APPLE).shapeless(Items.ROTTEN_FLESH).and().smelting(Items.DIAMOND).add();
 
 	}
 

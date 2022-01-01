@@ -3,11 +3,12 @@ package net.darktree.lotus.recipe;
 import com.google.gson.JsonElement;
 import net.darktree.lotus.recipe.type.*;
 import net.minecraft.item.Item;
+import org.apache.commons.lang3.mutable.MutableObject;
 import org.jetbrains.annotations.Nullable;
 
 public class RecipeBasicBuilder extends RecipeBuilder {
 
-	protected RecipeBasicBuilder(@Nullable RecipeOutput output) {
+	protected RecipeBasicBuilder(@Nullable MutableObject<RecipeOutput> output) {
 		super(output);
 	}
 

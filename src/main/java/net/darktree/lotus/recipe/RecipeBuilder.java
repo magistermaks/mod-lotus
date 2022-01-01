@@ -4,23 +4,39 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.item.Item;
 import net.minecraft.util.registry.Registry;
-import org.jetbrains.annotations.Nullable;
+import org.apache.commons.lang3.mutable.MutableObject;
 
 public abstract class RecipeBuilder {
 
-	protected RecipeOutput output;
+	protected RecipeBuilder chain;
+	protected MutableObject<RecipeOutput> output;
 
-	protected RecipeBuilder(@Nullable RecipeOutput output) {
+	protected RecipeBuilder(MutableObject<RecipeOutput> output) {
 		this.output = output;
 	}
 
 	public RecipeBuilder output(RecipeOutput output) {
-		this.output = output;
+		this.output.setValue(output);
 		return this;
 	}
 
+	protected RecipeBasicBuilder link(RecipeBuilder other) {
+		this.chain = other;
+		return (RecipeBasicBuilder) this;
+	}
+
+	protected Recipe append(Recipe recipe) {
+		recipe.add(this.json());
+		if(this.chain != null) this.chain.append(recipe);
+		return recipe;
+	}
+
+	public RecipeBasicBuilder and() {
+		return new RecipeBasicBuilder(this.output).link(this);
+	}
+
 	public Recipe get() {
-		return new Recipe(null, this.json());
+		return this.append(new Recipe(this.output.getValue().id()));
 	}
 
 	public void add() {
@@ -28,13 +44,13 @@ public abstract class RecipeBuilder {
 	}
 
 	protected JsonObject base(String type, ResultType result) {
-		if(output == null) {
+		if(output.getValue() == null) {
 			throw new RuntimeException("Unable to serialized un-configured recipe!");
 		}
 
 		JsonObject recipe = new JsonObject();
 		recipe.addProperty("type", type);
-		this.output.result(recipe, result);
+		this.output.getValue().result(recipe, result);
 
 		return recipe;
 	}

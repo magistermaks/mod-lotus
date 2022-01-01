@@ -5,13 +5,13 @@ import com.google.gson.JsonElement;
 import net.darktree.lotus.recipe.RecipeBuilder;
 import net.darktree.lotus.recipe.RecipeOutput;
 import net.minecraft.item.Item;
-import org.jetbrains.annotations.Nullable;
+import org.apache.commons.lang3.mutable.MutableObject;
 
 public abstract class IngredientRecipeBuilder extends RecipeBuilder {
 
 	protected JsonArray ingredients = new JsonArray();
 
-	protected IngredientRecipeBuilder(@Nullable RecipeOutput output) {
+	protected IngredientRecipeBuilder(MutableObject<RecipeOutput> output) {
 		super(output);
 	}
 
