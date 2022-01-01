@@ -1,15 +1,13 @@
 package net.darktree.lotus.recipe.type;
 
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import net.darktree.lotus.recipe.RecipeOutput;
+import net.darktree.lotus.recipe.RecipeBuilder;
 import net.minecraft.item.Item;
-import org.apache.commons.lang3.mutable.MutableObject;
 
 public class CuttingRecipeBuilder extends IngredientRecipeBuilder {
 
-	public CuttingRecipeBuilder(MutableObject<RecipeOutput> output, Item[] items) {
-		super(output);
+	public CuttingRecipeBuilder(RecipeBuilder parent, Item[] items) {
+		super(parent);
 
 		for( Item item : items ) {
 			addIngredient(item);
@@ -27,7 +25,7 @@ public class CuttingRecipeBuilder extends IngredientRecipeBuilder {
 	}
 
 	@Override
-	public JsonElement json() {
+	public JsonObject json() {
 		JsonObject recipe = base("stonecutting", ResultType.DOUBLE);
 		recipe.add("ingredient", getIngredient());
 

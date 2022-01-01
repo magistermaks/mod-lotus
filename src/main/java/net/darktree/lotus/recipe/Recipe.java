@@ -1,6 +1,6 @@
 package net.darktree.lotus.recipe;
 
-import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import net.darktree.interference.RecipeInjector;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
@@ -10,20 +10,25 @@ import java.util.ArrayList;
 
 public class Recipe {
 
-	private final ArrayList<JsonElement> list = new ArrayList<>();
-	private final Identifier id;
+	private final ArrayList<JsonObject> list = new ArrayList<>();
+	private final String id;
 
-	public Recipe(Identifier id) {
+	public Recipe(String id) {
 		this.id = id;
 	}
 
-	public void add(JsonElement recipe) {
+	public void add(JsonObject recipe) {
 		this.list.add(recipe);
 	}
 
+	private Identifier id(JsonObject recipe) {
+		return new Identifier(this.id + "_from_" + recipe.get("type").getAsString());
+	}
+
 	public void inject() {
-		for( JsonElement recipe : this.list ) {
-			RecipeInjector.inject(this.id, recipe);
+		for( JsonObject recipe : this.list ) {
+			System.out.println("Injected recipe with id: " + id(recipe).toString());
+			RecipeInjector.inject(id(recipe), recipe);
 		}
 	}
 

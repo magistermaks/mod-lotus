@@ -1,6 +1,5 @@
 package net.darktree.lotus.recipe;
 
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.item.Item;
 import net.minecraft.util.registry.Registry;
@@ -13,6 +12,12 @@ public abstract class RecipeBuilder {
 
 	protected RecipeBuilder(MutableObject<RecipeOutput> output) {
 		this.output = output;
+		this.chain = null;
+	}
+
+	protected RecipeBuilder(RecipeBuilder parent) {
+		this.output = parent.output;
+		this.chain = parent.chain;
 	}
 
 	public RecipeBuilder output(RecipeOutput output) {
@@ -36,7 +41,7 @@ public abstract class RecipeBuilder {
 	}
 
 	public Recipe get() {
-		return this.append(new Recipe(this.output.getValue().id()));
+		return this.append(new Recipe(this.output.getValue().item));
 	}
 
 	public void add() {
@@ -71,7 +76,7 @@ public abstract class RecipeBuilder {
 		return ingredient(Registry.ITEM.getId(item).toString());
 	}
 
-	public abstract JsonElement json();
+	public abstract JsonObject json();
 
 	protected enum ResultType {
 		OBJECT,

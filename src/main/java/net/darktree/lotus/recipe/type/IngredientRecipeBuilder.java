@@ -3,16 +3,14 @@ package net.darktree.lotus.recipe.type;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import net.darktree.lotus.recipe.RecipeBuilder;
-import net.darktree.lotus.recipe.RecipeOutput;
 import net.minecraft.item.Item;
-import org.apache.commons.lang3.mutable.MutableObject;
 
 public abstract class IngredientRecipeBuilder extends RecipeBuilder {
 
 	protected JsonArray ingredients = new JsonArray();
 
-	protected IngredientRecipeBuilder(MutableObject<RecipeOutput> output) {
-		super(output);
+	protected IngredientRecipeBuilder(RecipeBuilder parent) {
+		super(parent);
 	}
 
 	protected void addIngredient(Item item) {

@@ -1,10 +1,8 @@
 package net.darktree.lotus.recipe.type;
 
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import net.darktree.lotus.recipe.RecipeOutput;
+import net.darktree.lotus.recipe.RecipeBuilder;
 import net.minecraft.item.Item;
-import org.apache.commons.lang3.mutable.MutableObject;
 
 public class SmeltingRecipeBuilder extends IngredientRecipeBuilder {
 
@@ -12,8 +10,8 @@ public class SmeltingRecipeBuilder extends IngredientRecipeBuilder {
 	int time;
 	double experience = 0.35;
 
-	public SmeltingRecipeBuilder(MutableObject<RecipeOutput> output, FurnaceType type, Item[] items) {
-		super(output);
+	public SmeltingRecipeBuilder(RecipeBuilder parent, FurnaceType type, Item[] items) {
+		super(parent);
 		this.type = type.type;
 		this.time = type.time;
 
@@ -43,7 +41,7 @@ public class SmeltingRecipeBuilder extends IngredientRecipeBuilder {
 	}
 
 	@Override
-	public JsonElement json() {
+	public JsonObject json() {
 		JsonObject recipe = base(this.type, ResultType.STRING);
 		recipe.add("ingredient", getIngredient());
 		recipe.addProperty("experience", this.experience);

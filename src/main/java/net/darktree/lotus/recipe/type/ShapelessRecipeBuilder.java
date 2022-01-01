@@ -1,15 +1,13 @@
 package net.darktree.lotus.recipe.type;
 
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import net.darktree.lotus.recipe.RecipeOutput;
+import net.darktree.lotus.recipe.RecipeBuilder;
 import net.minecraft.item.Item;
-import org.apache.commons.lang3.mutable.MutableObject;
 
 public class ShapelessRecipeBuilder extends IngredientsRecipeBuilder {
 
-	public ShapelessRecipeBuilder(MutableObject<RecipeOutput> output, Item[] ingredients) {
-		super(output);
+	public ShapelessRecipeBuilder(RecipeBuilder parent, Item[] ingredients) {
+		super(parent);
 		this.addAllIngredients(ingredients);
 	}
 
@@ -34,7 +32,7 @@ public class ShapelessRecipeBuilder extends IngredientsRecipeBuilder {
 	}
 
 	@Override
-	public JsonElement json() {
+	public JsonObject json() {
 		JsonObject recipe = base("crafting_shapeless", ResultType.OBJECT);
 		recipe.add("ingredients", getIngredients());
 

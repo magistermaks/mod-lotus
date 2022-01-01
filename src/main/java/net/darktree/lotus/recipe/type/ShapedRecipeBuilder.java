@@ -1,20 +1,17 @@
 package net.darktree.lotus.recipe.type;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.darktree.lotus.recipe.RecipeBuilder;
-import net.darktree.lotus.recipe.RecipeOutput;
 import net.minecraft.item.Item;
-import org.apache.commons.lang3.mutable.MutableObject;
 
 public class ShapedRecipeBuilder extends RecipeBuilder {
 
 	private final JsonArray pattern = new JsonArray();
 	private KeyBuilder keys = new KeyBuilder();
 
-	public ShapedRecipeBuilder(MutableObject<RecipeOutput> output, String pattern) {
-		super(output);
+	public ShapedRecipeBuilder(RecipeBuilder parent, String pattern) {
+		super(parent);
 
 		for( String line : pattern.split(",") ){
 			this.pattern.add(line);
@@ -37,7 +34,7 @@ public class ShapedRecipeBuilder extends RecipeBuilder {
 	}
 
 	@Override
-	public JsonElement json() {
+	public JsonObject json() {
 		JsonObject recipe = base("crafting_shaped", ResultType.OBJECT);
 		recipe.add("pattern", this.pattern);
 		recipe.add("key", this.keys.json);
