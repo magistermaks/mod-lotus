@@ -8,12 +8,19 @@ public class SmeltingRecipeBuilder extends IngredientRecipeBuilder {
 
 	String type;
 	int time;
-	double experience = 0.35;
+	double experience;
 
-	public SmeltingRecipeBuilder(RecipeBuilder parent, FurnaceType type, Item[] items) {
+	/**
+	 * Experience values for reference
+	 * - cooking porkchop - 0.35
+	 * - smelting iron - 0.7
+	 * - smelting gold - 1.0
+	 */
+	public SmeltingRecipeBuilder(RecipeBuilder parent, FurnaceType type, Item[] items, double experience) {
 		super(parent);
 		this.type = type.type;
 		this.time = type.time;
+		this.experience = experience;
 
 		for(Item item : items) {
 			this.put(item);

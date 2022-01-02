@@ -13,7 +13,7 @@ public class RecipeBasicBuilder extends RecipeBuilder {
 	}
 
 	public JsonObject json() {
-		throw new RuntimeException("Serializing RecipeBuilder is not allowed!");
+		throw new RuntimeException("Serializing RecipeBasicBuilder is not allowed!");
 	}
 
 	public ShapelessRecipeBuilder shapeless(Item... items) {
@@ -33,19 +33,35 @@ public class RecipeBasicBuilder extends RecipeBuilder {
 	}
 
 	public SmeltingRecipeBuilder smelting(Item... items) {
-		return new SmeltingRecipeBuilder(this, FurnaceType.DEFAULT, items);
+		return this.smelting(0.35, items);
 	}
 
 	public SmeltingRecipeBuilder smoking(Item... items) {
-		return new SmeltingRecipeBuilder(this, FurnaceType.SMOKING, items);
+		return this.smoking(0.35, items);
 	}
 
 	public SmeltingRecipeBuilder blasting(Item... items) {
-		return new SmeltingRecipeBuilder(this, FurnaceType.BLASTING, items);
+		return this.blasting(0.35, items);
 	}
 
 	public SmeltingRecipeBuilder campfire(Item... items) {
-		return new SmeltingRecipeBuilder(this, FurnaceType.CAMPFIRE, items);
+		return this.campfire(0.35, items);
+	}
+
+	public SmeltingRecipeBuilder smelting(double experience, Item... items) {
+		return new SmeltingRecipeBuilder(this, FurnaceType.DEFAULT, items, experience);
+	}
+
+	public SmeltingRecipeBuilder smoking(double experience, Item... items) {
+		return new SmeltingRecipeBuilder(this, FurnaceType.SMOKING, items, experience);
+	}
+
+	public SmeltingRecipeBuilder blasting(double experience, Item... items) {
+		return new SmeltingRecipeBuilder(this, FurnaceType.BLASTING, items, experience);
+	}
+
+	public SmeltingRecipeBuilder campfire(double experience, Item... items) {
+		return new SmeltingRecipeBuilder(this, FurnaceType.CAMPFIRE, items, experience);
 	}
 
 	public SmithingRecipeBuilder smithing() {
@@ -62,6 +78,14 @@ public class RecipeBasicBuilder extends RecipeBuilder {
 
 	public CuttingRecipeBuilder cutting(Item... items) {
 		return new CuttingRecipeBuilder(this, items);
+	}
+
+	public RecipeBuilder cooking(Item... items) {
+		return this.cooking(0.35, items);
+	}
+
+	public RecipeBuilder cooking(double experience, Item... items) {
+		return this.smelting(experience, items).and().smoking(experience, items).and().campfire(experience, items);
 	}
 
 }

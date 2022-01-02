@@ -17,12 +17,20 @@ public class Lotus implements ModInitializer {
 
 //		FACTORY.block("%0_%1_test_block", TYPES, TYPES).item().dropSelf().gen(TestBlock::new).get();
 
-		FACTORY.block("test_block").of(TestBlock::new).item().drop(Items.DIRT).get();
+		FACTORY.block("test_block").of(TestBlock::new)
+				.item()
+				.drop(Items.DIRT)
+				.recipe(Recipe.raw().shape2x2(Items.OBSIDIAN))
+				.get();
+
 		Recipe.of(Items.STONE).shapeless(Items.DIRT).add();
 		Recipe.of(Items.DIAMOND).shapeless().put(Items.STONE).put(Items.COARSE_DIRT).add();
 		Recipe.of(Items.DIAMOND).shape2x2(Items.ROTTEN_FLESH).add();
 
 		Recipe.of(Items.APPLE).shapeless(Items.ROTTEN_FLESH).and().smelting(Items.DIAMOND).add();
+
+		// define 3 recipes
+		Recipe.of(Items.STONE).cooking(Items.DIRT).add();
 
 	}
 
