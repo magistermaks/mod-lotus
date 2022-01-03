@@ -2,6 +2,9 @@ package net.darktree.lotus;
 
 import net.darktree.lotus.factory.Factory;
 import net.darktree.lotus.factory.builder.old.variant.VariantIterator;
+import net.darktree.lotus.model.Model;
+import net.darktree.lotus.model.factory.ApplicableFactory;
+import net.darktree.lotus.model.factory.VariantFactory;
 import net.darktree.lotus.recipe.Recipe;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.item.Items;
@@ -31,6 +34,20 @@ public class Lotus implements ModInitializer {
 
 		// define 3 recipes
 		Recipe.of(Items.STONE).cooking(Items.DIRT).add();
+
+//		ApplicableFactory model = Model.variant()
+//				.always()
+//					.model("block/dirt").weight(2).pop()
+//					.model("block/stone").pop()
+//					.pop()
+//				.get();
+
+		ApplicableFactory model = Model.multipart()
+				.any()
+					.when("a", "1").or().when("b", "2").then().model("block/stone").pop().pop()
+				.get();
+
+		model.inject("lotus:test_block");
 
 	}
 
