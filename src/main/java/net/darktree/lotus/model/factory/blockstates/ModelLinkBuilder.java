@@ -1,6 +1,7 @@
 package net.darktree.lotus.model.factory.blockstates;
 
 import com.google.gson.JsonObject;
+import net.darktree.lotus.model.factory.common.ModelProvider;
 
 public class ModelLinkBuilder<T> implements Popable<T> {
 
@@ -13,8 +14,8 @@ public class ModelLinkBuilder<T> implements Popable<T> {
 
 	private final T back;
 
-	public ModelLinkBuilder(T back, String path) {
-		this.provider = ModelProvider.of(path);
+	public ModelLinkBuilder(T back, ModelProvider provider) {
+		this.provider = provider;
 		this.back = back;
 	}
 

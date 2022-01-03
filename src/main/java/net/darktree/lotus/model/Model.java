@@ -3,6 +3,7 @@ package net.darktree.lotus.model;
 import net.darktree.lotus.model.factory.ModelFactory;
 import net.darktree.lotus.model.factory.MultipartFactory;
 import net.darktree.lotus.model.factory.VariantFactory;
+import net.darktree.lotus.model.factory.common.ModelProvider;
 
 public class Model {
 
@@ -14,8 +15,8 @@ public class Model {
 		return new MultipartFactory();
 	}
 
-	public static ModelFactory model() {
-		return new ModelFactory();
+	public static ModelFactory model(ModelProvider provider) {
+		return new ModelFactory(provider);
 	}
 
 }

@@ -1,4 +1,4 @@
-package net.darktree.lotus.model.factory.blockstates;
+package net.darktree.lotus.model.factory.common;
 
 public interface ModelProvider {
 

@@ -2,6 +2,7 @@ package net.darktree.lotus.model.factory.blockstates;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import net.darktree.lotus.model.factory.common.ModelProvider;
 
 import java.util.ArrayList;
 
@@ -15,8 +16,8 @@ public class ModelLinkArrayBuilder<T> implements Popable<T> {
 		this.parent = parent;
 	}
 
-	public ModelLinkBuilder<ModelLinkArrayBuilder<T>> model(String path) {
-		ModelLinkBuilder<ModelLinkArrayBuilder<T>> link = new ModelLinkBuilder<>(this, path);
+	public ModelLinkBuilder<ModelLinkArrayBuilder<T>> model(ModelProvider provider) {
+		ModelLinkBuilder<ModelLinkArrayBuilder<T>> link = new ModelLinkBuilder<>(this, provider);
 		this.links.add(link);
 		return link;
 	}

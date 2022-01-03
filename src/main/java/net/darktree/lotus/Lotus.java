@@ -5,6 +5,8 @@ import net.darktree.lotus.factory.builder.old.variant.VariantIterator;
 import net.darktree.lotus.model.Model;
 import net.darktree.lotus.model.factory.ApplicableFactory;
 import net.darktree.lotus.model.factory.VariantFactory;
+import net.darktree.lotus.model.factory.common.ModelProvider;
+import net.darktree.lotus.model.factory.model.Face;
 import net.darktree.lotus.recipe.Recipe;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.item.Items;
@@ -42,12 +44,23 @@ public class Lotus implements ModInitializer {
 //					.pop()
 //				.get();
 
-		ApplicableFactory model = Model.multipart()
-				.any()
-					.when("a", "1").or().when("b", "2").then().model("block/stone").pop().pop()
+		ModelProvider model = Model.model(ModelProvider.of("block/block"))
+				.textures()
+					.particle("block/magma")
+					.texture("base", "block/stone")
+					.pop()
+				.elements()
+					.element(0, 0, 0, 16, 16, 16).faces("#base")
+					.pop()
+				.provider();
+
+		ApplicableFactory state = Model.variant()
+				.always()
+					.model(model).pop()
+					.pop()
 				.get();
 
-		model.inject("lotus:test_block");
+		state.inject("lotus:test_block");
 
 	}
 
