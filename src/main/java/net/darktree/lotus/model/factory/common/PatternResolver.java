@@ -13,4 +13,8 @@ public final class PatternResolver {
 		return ID.matcher(NAME.matcher(pattern).replaceAll(id.getPath())).replaceAll(id.getNamespace());
 	}
 
+	public static Identifier id(String pattern, Identifier id) {
+		return new Identifier(of(pattern, id));
+	}
+
 }

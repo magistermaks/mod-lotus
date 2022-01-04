@@ -18,8 +18,12 @@ public class VariantFactory {
 	}
 
 	public ModelLinkArrayBuilder<VariantFactory> when(String state, String value) {
+		return this.when(state + "=" + value);
+	}
+
+	public ModelLinkArrayBuilder<VariantFactory> when(String variant) {
 		ModelLinkArrayBuilder<VariantFactory> linkArray = new ModelLinkArrayBuilder<>(this);
-		variants.add(Pair.of(state + "=" + value, linkArray));
+		variants.add(Pair.of(variant, linkArray));
 		return linkArray;
 	}
 
@@ -32,6 +36,9 @@ public class VariantFactory {
 		}
 
 		model.add("variants", variants);
+
+		System.out.println(model.toString());
+
 		return model;
 	}
 

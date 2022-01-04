@@ -2,10 +2,15 @@ package net.darktree.lotus;
 
 import net.darktree.lotus.factory.Factory;
 import net.darktree.lotus.factory.builder.old.variant.VariantIterator;
+import net.darktree.lotus.factory.builder.provider.BlockProvider;
 import net.darktree.lotus.model.Models;
 import net.darktree.lotus.recipe.Recipe;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.block.Block;
+import net.minecraft.block.SlabBlock;
+import net.minecraft.block.StairsBlock;
 import net.minecraft.item.Items;
+import org.lwjgl.system.CallbackI;
 
 
 public class Lotus implements ModInitializer {
@@ -19,20 +24,26 @@ public class Lotus implements ModInitializer {
 	@Override
 	public void onInitialize() {
 
-		FACTORY.block("test_block").of(TestBlock::new)
-				.item() // create a block item, can be configured to use a custom lambda
-				.drop(Items.DIRT) // defines the default loot, you can use lambdas for loot generations
-				.recipe(Recipe.raw().shape2x2(Items.OBSIDIAN)) // define default item recipe
-				.model(Models.CUBE) // set a default model factory, you can define your own model factories
+		Block test = FACTORY.block("test_block").of(TestBlock::new)
+				.item()
+				.drop(Items.DIRT)
+				.recipe(Recipe.raw().shape2x2(Items.OBSIDIAN))
+				.model(Models.CUBE)
 				.get();
 
-	}
+		FACTORY.block("test_block_stairs").of((BlockProvider) provider -> new TestStairsBlock(test.getDefaultState(), provider.getBlockSettings()))
+				.item()
+				.drop(Items.DIRT)
+				//.recipe(Recipe.raw().stair(Items.OBSIDIAN))
+				.model(Models.STAIR)
+				.get();
 
-
-
-
-
-	private void s() {
+		FACTORY.block("test_block_slab").of(SlabBlock::new)
+				.item()
+				.drop(Items.DIRT)
+				//.recipe(Recipe.raw().shape2x2(Items.OBSIDIAN))
+				.model(Models.SLAB)
+				.get();
 
 		Recipe.of(Items.STONE).shapeless(Items.DIRT).add();
 		Recipe.of(Items.DIAMOND).shapeless().put(Items.STONE).put(Items.COARSE_DIRT).add();

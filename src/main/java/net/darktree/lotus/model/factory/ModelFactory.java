@@ -3,6 +3,7 @@ package net.darktree.lotus.model.factory;
 import com.google.gson.JsonObject;
 import net.darktree.interference.ModelInjector;
 import net.darktree.lotus.model.factory.common.ModelProvider;
+import net.darktree.lotus.model.factory.common.PatternResolver;
 import net.darktree.lotus.model.factory.model.DisplayBuilder;
 import net.darktree.lotus.model.factory.model.ElementsBuilder;
 import net.darktree.lotus.model.factory.model.TexturesBuilder;
@@ -53,12 +54,15 @@ public class ModelFactory {
 		return model;
 	}
 
-	public ApplicableFactory get() {
-		return identifier -> ModelInjector.injectModel(identifier, this.json(identifier));
+	public ApplicableFactory get(Identifier resource) {
+		return identifier -> ModelInjector.injectModel(identifier, this.json(resource));
 	}
 
-	public ModelProvider provider() {
-		return identifier -> { get().inject(identifier); return identifier.toString(); };
+	public ModelProvider provider(String pattern) {
+		return identifier -> {
+			Identifier id = PatternResolver.id(pattern, identifier);
+			get(identifier).inject(id);
+			return id.toString(); };
 	}
 
 }

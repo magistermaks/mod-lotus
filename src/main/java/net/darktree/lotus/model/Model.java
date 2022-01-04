@@ -28,4 +28,12 @@ public class Model {
 		return variant().always().model(model).pop().pop().get();
 	}
 
+	/**
+	 * Utility method for creating a model provider that inherits from given model
+	 * and applies the texture string to texture tag #all
+	 */
+	public static ModelProvider texturedModelAll(String model, String texture, String name) {
+		return Model.model(ModelProvider.of(model)).textures().texture("all", texture).pop().provider(name);
+	}
+
 }
