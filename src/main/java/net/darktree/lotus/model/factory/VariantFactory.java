@@ -23,7 +23,7 @@ public class VariantFactory {
 		return linkArray;
 	}
 
-	public JsonObject json(String name) {
+	public JsonObject json(Identifier name) {
 		JsonObject model = new JsonObject();
 		JsonObject variants = new JsonObject();
 
@@ -36,7 +36,7 @@ public class VariantFactory {
 	}
 
 	public ApplicableFactory get() {
-		return name -> ModelInjector.injectBlockState(new Identifier(name), this.json(name));
+		return identifier -> ModelInjector.injectBlockState(identifier, this.json(identifier));
 	}
 
 }

@@ -25,7 +25,7 @@ public class MultipartFactory {
 		return condition;
 	}
 
-	public JsonObject json(String name) {
+	public JsonObject json(Identifier name) {
 		JsonObject object = new JsonObject();
 		JsonArray array = new JsonArray();
 
@@ -38,7 +38,7 @@ public class MultipartFactory {
 	}
 
 	public ApplicableFactory get() {
-		return name -> ModelInjector.injectBlockState(new Identifier(name), this.json(name));
+		return identifier -> ModelInjector.injectBlockState(identifier, this.json(identifier));
 	}
 
 }

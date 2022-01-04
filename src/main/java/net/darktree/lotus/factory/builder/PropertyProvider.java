@@ -4,6 +4,7 @@ import net.darktree.lotus.factory.builder.provider.BlockProvider;
 import net.darktree.lotus.factory.builder.provider.ItemProvider;
 import net.darktree.lotus.factory.builder.provider.LootProvider;
 import net.darktree.lotus.factory.builder.provider.RecipeProvider;
+import net.darktree.lotus.model.factory.ApplicableFactory;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import org.jetbrains.annotations.ApiStatus;
@@ -17,6 +18,7 @@ public abstract class PropertyProvider {
 	LootProvider lootProvider = null;
 	ItemProvider itemProvider = null;
 	RecipeProvider recipeProvider = null;
+	ApplicableFactory modelProvider = null;
 
 	@NotNull
 	@ApiStatus.Internal
@@ -52,4 +54,8 @@ public abstract class PropertyProvider {
 		return parent().getRecipeProvider();
 	}
 
+	public ApplicableFactory getModelProvider() {
+		if(this.modelProvider != null) return this.modelProvider;
+		return parent().getModelProvider();
+	}
 }

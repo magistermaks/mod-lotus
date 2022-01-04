@@ -2,6 +2,7 @@ package net.darktree.lotus.model.factory.blockstates;
 
 import com.google.gson.JsonObject;
 import net.darktree.lotus.model.factory.common.ModelProvider;
+import net.minecraft.util.Identifier;
 
 public class ModelLinkBuilder<T> implements Popable<T> {
 
@@ -51,7 +52,7 @@ public class ModelLinkBuilder<T> implements Popable<T> {
 		return this.back;
 	}
 
-	public JsonObject json(String name) {
+	public JsonObject json(Identifier name) {
 		JsonObject model = new JsonObject();
 		model.addProperty("x", this.x);
 		model.addProperty("y", this.y);

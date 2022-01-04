@@ -1,5 +1,7 @@
 package net.darktree.lotus.model.factory;
 
+import net.minecraft.util.Identifier;
+
 public interface ApplicableFactory {
-	void inject(String name);
+	void inject(Identifier name);
 }

@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.darktree.lotus.model.factory.MultipartFactory;
+import net.minecraft.util.Identifier;
 
 public class MultipartCondition {
 
@@ -47,7 +48,7 @@ public class MultipartCondition {
 		return this.then;
 	}
 
-	public JsonElement json(String name) {
+	public JsonElement json(Identifier name) {
 		JsonObject object = new JsonObject();
 
 		if(any) {

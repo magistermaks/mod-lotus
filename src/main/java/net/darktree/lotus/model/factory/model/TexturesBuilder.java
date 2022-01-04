@@ -3,6 +3,8 @@ package net.darktree.lotus.model.factory.model;
 import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Pair;
 import net.darktree.lotus.model.factory.ModelFactory;
+import net.darktree.lotus.model.factory.common.PatternResolver;
+import net.minecraft.util.Identifier;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -29,11 +31,11 @@ public class TexturesBuilder {
 		return this.parent;
 	}
 
-	public JsonObject json(String name) {
+	public JsonObject json(Identifier name) {
 		JsonObject object = new JsonObject();
 
 		for(Pair<String, String> texture : this.textures) {
-			object.addProperty(texture.getFirst(), texture.getSecond().replaceAll("\\$\\{name}", name));
+			object.addProperty(texture.getFirst(), PatternResolver.of(texture.getSecond(), name));
 		}
 
 		return object;

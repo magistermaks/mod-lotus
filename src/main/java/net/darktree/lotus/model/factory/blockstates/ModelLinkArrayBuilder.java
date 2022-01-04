@@ -3,6 +3,7 @@ package net.darktree.lotus.model.factory.blockstates;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import net.darktree.lotus.model.factory.common.ModelProvider;
+import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;
 
@@ -22,7 +23,7 @@ public class ModelLinkArrayBuilder<T> implements Popable<T> {
 		return link;
 	}
 
-	public JsonElement json(String name) {
+	public JsonElement json(Identifier name) {
 		if(links.size() == 1) {
 			return this.links.get(0).json(name);
 		}

@@ -3,6 +3,7 @@ package net.darktree.lotus.factory.builder;
 import net.darktree.interference.LootInjector;
 import net.darktree.interference.RecipeInjector;
 import net.darktree.lotus.factory.builder.provider.*;
+import net.darktree.lotus.model.factory.ApplicableFactory;
 import net.darktree.lotus.recipe.Recipe;
 import net.darktree.lotus.recipe.RecipeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -40,6 +41,12 @@ public class BlockBuilder extends PropertyProvider {
 		LootProvider lootProvider = getLootProvider();
 		if(lootProvider != null) {
 			LootInjector.inject(id, lootProvider.provider());
+		}
+
+		// attach block model
+		ApplicableFactory modelProvider = getModelProvider();
+		if(modelProvider != null) {
+			modelProvider.inject(id);
 		}
 
 		// attach block item
@@ -115,6 +122,11 @@ public class BlockBuilder extends PropertyProvider {
 
 	public BlockBuilder recipe(RecipeBuilder recipe, int count, String group) {
 		this.recipeProvider = RecipeProvider.of(recipe, count, group);
+		return this;
+	}
+
+	public BlockBuilder model(ApplicableFactory model) {
+		this.modelProvider = model;
 		return this;
 	}
 

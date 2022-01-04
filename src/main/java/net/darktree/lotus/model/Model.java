@@ -1,5 +1,6 @@
 package net.darktree.lotus.model;
 
+import net.darktree.lotus.model.factory.ApplicableFactory;
 import net.darktree.lotus.model.factory.ModelFactory;
 import net.darktree.lotus.model.factory.MultipartFactory;
 import net.darktree.lotus.model.factory.VariantFactory;
@@ -17,6 +18,14 @@ public class Model {
 
 	public static ModelFactory model(ModelProvider provider) {
 		return new ModelFactory(provider);
+	}
+
+	/**
+	 * Utility method for creating a blockstate model factory that always
+	 * uses the one given model provider.
+	 */
+	public static ApplicableFactory link(ModelProvider model) {
+		return variant().always().model(model).pop().pop().get();
 	}
 
 }

@@ -27,7 +27,6 @@ public class Recipe {
 
 	public void inject() {
 		for( JsonObject recipe : this.list ) {
-			System.out.println("Injected recipe with id: " + id(recipe).toString());
 			RecipeInjector.inject(id(recipe), recipe);
 		}
 	}

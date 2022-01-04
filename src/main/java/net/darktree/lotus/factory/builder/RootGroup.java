@@ -4,6 +4,7 @@ import net.darktree.lotus.factory.builder.provider.BlockProvider;
 import net.darktree.lotus.factory.builder.provider.ItemProvider;
 import net.darktree.lotus.factory.builder.provider.LootProvider;
 import net.darktree.lotus.factory.builder.provider.RecipeProvider;
+import net.darktree.lotus.model.factory.ApplicableFactory;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
@@ -47,4 +48,9 @@ public class RootGroup extends PropertyProvider {
 	public RecipeProvider getRecipeProvider() {
 		return RecipeProvider.NONE;
 	}
+
+	public ApplicableFactory getModelProvider() {
+		return null;
+	}
+
 }

@@ -41,7 +41,7 @@ public class ModelFactory {
 		return this.elements;
 	}
 
-	public JsonObject json(String name) {
+	public JsonObject json(Identifier name) {
 		JsonObject model = new JsonObject();
 		model.addProperty("parent", this.parent.get(name));
 		model.addProperty("ambientocclusion", this.ambientOcclusion);
@@ -54,11 +54,11 @@ public class ModelFactory {
 	}
 
 	public ApplicableFactory get() {
-		return name -> ModelInjector.injectModel(new Identifier(name), this.json(name));
+		return identifier -> ModelInjector.injectModel(identifier, this.json(identifier));
 	}
 
 	public ModelProvider provider() {
-		return name -> { get().inject(name); return name; };
+		return identifier -> { get().inject(identifier); return identifier.toString(); };
 	}
 
 }
