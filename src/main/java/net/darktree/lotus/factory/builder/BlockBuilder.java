@@ -1,10 +1,8 @@
 package net.darktree.lotus.factory.builder;
 
 import net.darktree.interference.LootInjector;
-import net.darktree.interference.RecipeInjector;
 import net.darktree.lotus.factory.builder.provider.*;
 import net.darktree.lotus.model.factory.ApplicableFactory;
-import net.darktree.lotus.recipe.Recipe;
 import net.darktree.lotus.recipe.RecipeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
@@ -44,9 +42,9 @@ public class BlockBuilder extends PropertyProvider {
 		}
 
 		// attach block model
-		ApplicableFactory modelProvider = getModelProvider();
-		if(modelProvider != null) {
-			modelProvider.inject(id);
+		ApplicableFactory blockModelProvider = getBlockModelProvider();
+		if(blockModelProvider != null) {
+			blockModelProvider.inject(id);
 		}
 
 		// attach block item
@@ -54,6 +52,12 @@ public class BlockBuilder extends PropertyProvider {
 		if(itemProvider != null) {
 			Item item = itemProvider.get(this, block);
 			Registry.register(Registry.ITEM, id, item);
+
+			// attach item model
+			ApplicableFactory itemModelProvider = getItemModelProvider();
+			if(itemModelProvider != null) {
+				itemModelProvider.inject(id);
+			}
 
 			// attach item recipe
 			RecipeProvider recipeProvider = getRecipeProvider();
@@ -126,7 +130,12 @@ public class BlockBuilder extends PropertyProvider {
 	}
 
 	public BlockBuilder model(ApplicableFactory model) {
-		this.modelProvider = model;
+		this.blockModelProvider = model;
+		return this;
+	}
+
+	public BlockBuilder itemModel(ApplicableFactory model) {
+		this.itemModelProvider = model;
 		return this;
 	}
 

@@ -8,9 +8,7 @@ import net.darktree.lotus.recipe.Recipe;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.block.Block;
 import net.minecraft.block.SlabBlock;
-import net.minecraft.block.StairsBlock;
 import net.minecraft.item.Items;
-import org.lwjgl.system.CallbackI;
 
 
 public class Lotus implements ModInitializer {
@@ -29,20 +27,23 @@ public class Lotus implements ModInitializer {
 				.drop(Items.DIRT)
 				.recipe(Recipe.raw().shape2x2(Items.OBSIDIAN))
 				.model(Models.CUBE)
+				.itemModel(Models.ITEM_FLAT)
 				.get();
 
 		FACTORY.block("test_block_stairs").of((BlockProvider) provider -> new TestStairsBlock(test.getDefaultState(), provider.getBlockSettings()))
 				.item()
 				.drop(Items.DIRT)
 				//.recipe(Recipe.raw().stair(Items.OBSIDIAN))
-				.model(Models.STAIR)
+				.model(Models.STAIR.wrap("lotus:test_block"))
+				.itemModel(Models.ITEM_FLAT.wrap("lotus:test_block"))
 				.get();
 
 		FACTORY.block("test_block_slab").of(SlabBlock::new)
 				.item()
 				.drop(Items.DIRT)
 				//.recipe(Recipe.raw().shape2x2(Items.OBSIDIAN))
-				.model(Models.SLAB)
+				.model(Models.SLAB.wrap("lotus:test_block"))
+				.itemModel(Models.ITEM_FLAT.wrap("lotus:test_block"))
 				.get();
 
 		Recipe.of(Items.STONE).shapeless(Items.DIRT).add();

@@ -27,23 +27,21 @@ public class VariantFactory {
 		return linkArray;
 	}
 
-	public JsonObject json(Identifier name) {
+	public JsonObject json(Identifier name, Identifier data) {
 		JsonObject model = new JsonObject();
 		JsonObject variants = new JsonObject();
 
 		for(Pair<String, ModelLinkArrayBuilder<VariantFactory>> variant : this.variants) {
-			variants.add(variant.getFirst(), variant.getSecond().json(name));
+			variants.add(variant.getFirst(), variant.getSecond().json(name, data));
 		}
 
 		model.add("variants", variants);
-
-		System.out.println(model.toString());
 
 		return model;
 	}
 
 	public ApplicableFactory get() {
-		return identifier -> ModelInjector.injectBlockState(identifier, this.json(identifier));
+		return (name, data) -> ModelInjector.injectBlockState(name, this.json(name, data));
 	}
 
 }

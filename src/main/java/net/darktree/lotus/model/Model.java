@@ -33,7 +33,7 @@ public class Model {
 	 * and applies the texture string to texture tag #all
 	 */
 	public static ModelProvider texturedModelAll(String model, String texture, String name) {
-		return Model.model(ModelProvider.of(model)).textures().texture("all", texture).pop().provider(name);
+		return Model.model(ModelProvider.ofName(model)).textures().texture("all", texture).pop().provider(name);
 	}
 
 }

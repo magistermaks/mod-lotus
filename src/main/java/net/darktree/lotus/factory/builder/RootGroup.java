@@ -49,8 +49,14 @@ public class RootGroup extends PropertyProvider {
 		return RecipeProvider.NONE;
 	}
 
-	public ApplicableFactory getModelProvider() {
+	@Override
+	public ApplicableFactory getBlockModelProvider() {
 		return null;
+	}
+
+	@Override
+	public ApplicableFactory getItemModelProvider() {
+		return this.itemModelProvider;
 	}
 
 }

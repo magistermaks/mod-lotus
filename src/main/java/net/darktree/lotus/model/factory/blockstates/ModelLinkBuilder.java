@@ -52,12 +52,12 @@ public class ModelLinkBuilder<T> implements Popable<T> {
 		return this.back;
 	}
 
-	public JsonObject json(Identifier name) {
+	public JsonObject json(Identifier name, Identifier data) {
 		JsonObject model = new JsonObject();
 		model.addProperty("x", this.x);
 		model.addProperty("y", this.y);
 		model.addProperty("uvlock", this.lock);
-		model.addProperty("model", this.provider.get(name));
+		model.addProperty("model", this.provider.get(name, data));
 		model.addProperty("weight", this.weight);
 
 		return model;

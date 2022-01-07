@@ -48,7 +48,7 @@ public class MultipartCondition {
 		return this.then;
 	}
 
-	public JsonElement json(Identifier name) {
+	public JsonElement json(Identifier name, Identifier data) {
 		JsonObject object = new JsonObject();
 
 		if(any) {
@@ -57,7 +57,7 @@ public class MultipartCondition {
 		}
 
 		object.add("when", this.condition);
-		object.add("apply", this.then.json(name));
+		object.add("apply", this.then.json(name, data));
 
 		return object;
 	}

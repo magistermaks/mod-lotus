@@ -31,11 +31,11 @@ public class TexturesBuilder {
 		return this.parent;
 	}
 
-	public JsonObject json(Identifier name) {
+	public JsonObject json(Identifier data) {
 		JsonObject object = new JsonObject();
 
 		for(Pair<String, String> texture : this.textures) {
-			object.addProperty(texture.getFirst(), PatternResolver.of(texture.getSecond(), name));
+			object.addProperty(texture.getFirst(), PatternResolver.of(texture.getSecond(), data));
 		}
 
 		return object;

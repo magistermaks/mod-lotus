@@ -42,27 +42,32 @@ public class ModelFactory {
 		return this.elements;
 	}
 
-	public JsonObject json(Identifier name) {
+	public JsonObject json(Identifier name, Identifier data) {
 		JsonObject model = new JsonObject();
-		model.addProperty("parent", this.parent.get(name));
+		model.addProperty("parent", this.parent.get(name, data));
 		model.addProperty("ambientocclusion", this.ambientOcclusion);
 
 		if(this.display != null) model.add("display", this.display.json());
-		if(this.textures != null) model.add("textures", this.textures.json(name));
+		if(this.textures != null) model.add("textures", this.textures.json(data));
 		if(this.elements != null) model.add("elements", this.elements.json());
 
 		return model;
 	}
 
-	public ApplicableFactory get(Identifier resource) {
-		return identifier -> ModelInjector.injectModel(identifier, this.json(resource));
+	public ApplicableFactory get(String prefix) {
+		return (name, data) -> {
+			name = new Identifier(name.getNamespace(), prefix + name.getPath());
+			System.out.println("name: " + name.toString() + " data: " + data.toString()) ;
+			ModelInjector.injectModel(name, this.json(name, data));
+		};
 	}
 
 	public ModelProvider provider(String pattern) {
-		return identifier -> {
-			Identifier id = PatternResolver.id(pattern, identifier);
-			get(identifier).inject(id);
-			return id.toString(); };
+		return (name, data) -> {
+			name = PatternResolver.id(pattern, name);
+			get("").inject(name, data);
+			return name.toString();
+		};
 	}
 
 }

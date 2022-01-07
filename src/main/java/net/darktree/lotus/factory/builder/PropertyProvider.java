@@ -18,7 +18,8 @@ public abstract class PropertyProvider {
 	LootProvider lootProvider = null;
 	ItemProvider itemProvider = null;
 	RecipeProvider recipeProvider = null;
-	ApplicableFactory modelProvider = null;
+	ApplicableFactory blockModelProvider = null;
+	ApplicableFactory itemModelProvider = null;
 
 	@NotNull
 	@ApiStatus.Internal
@@ -54,8 +55,14 @@ public abstract class PropertyProvider {
 		return parent().getRecipeProvider();
 	}
 
-	public ApplicableFactory getModelProvider() {
-		if(this.modelProvider != null) return this.modelProvider;
-		return parent().getModelProvider();
+	public ApplicableFactory getBlockModelProvider() {
+		if(this.blockModelProvider != null) return this.blockModelProvider;
+		return parent().getBlockModelProvider();
 	}
+
+	public ApplicableFactory getItemModelProvider() {
+		if(this.itemModelProvider != null) return this.itemModelProvider;
+		return parent().getItemModelProvider();
+	}
+
 }

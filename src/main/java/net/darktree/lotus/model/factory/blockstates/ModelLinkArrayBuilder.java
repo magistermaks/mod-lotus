@@ -23,9 +23,9 @@ public class ModelLinkArrayBuilder<T> implements Popable<T> {
 		return link;
 	}
 
-	public JsonElement json(Identifier name) {
+	public JsonElement json(Identifier name, Identifier data) {
 		if(links.size() == 1) {
-			return this.links.get(0).json(name);
+			return this.links.get(0).json(name, data);
 		}
 
 		if(links.size() == 0) {
@@ -34,7 +34,7 @@ public class ModelLinkArrayBuilder<T> implements Popable<T> {
 
 		JsonArray array = new JsonArray();
 		for(ModelLinkBuilder<ModelLinkArrayBuilder<T>> link : this.links) {
-			array.add(link.json(name));
+			array.add(link.json(name, data));
 		}
 
 		return array;

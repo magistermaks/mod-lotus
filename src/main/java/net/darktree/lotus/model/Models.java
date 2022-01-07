@@ -12,12 +12,25 @@ public class Models {
 	public static final ApplicableFactory CUBE = texturedCubeOf("${id}:blocks/${name}");
 	public static final ApplicableFactory STAIR = texturedStairOf("${id}:blocks/${name}");
 	public static final ApplicableFactory SLAB = texturedSlabOf("${id}:blocks/${name}");
+	public static final ApplicableFactory ITEM_FLAT = itemGenerated("${id}:items/${name}");
+//	public static final ApplicableFactory ITEM_INHERIT = itemInherit();
+
+//	public static ApplicableFactory itemInherit() {
+//		return Model.model(ModelProvider.ofName("${id}"))
+//				.get("item/");
+//	}
+
+	public static ApplicableFactory itemGenerated(String texture) {
+		return Model.model(ModelProvider.ofName("item/generated"))
+				.textures().texture("layer0", texture).pop()
+				.get("item/");
+	}
 
 	/**
 	 * Create a simple cube model factory that uses the given texture pattern for all sides
 	 */
 	public static ApplicableFactory texturedCubeOf(String texture) {
-		ModelProvider model = Model.texturedModelAll("minecraft:block/cube_all", texture, "${id}:${name}");
+		ModelProvider model = Model.texturedModelAll("minecraft:block/cube_all", texture, "${id}:block/${name}");
 		return Model.link(model);
 	}
 
@@ -25,9 +38,9 @@ public class Models {
 	 * Create a simple slab model factory that uses the given texture pattern for all sides
 	 */
 	public static ApplicableFactory texturedSlabOf(String texture) {
-		ModelProvider modelBottom = Model.texturedModelAll("lotus:block/slab_bottom_all", texture, "${id}:${name}_bottom");
-		ModelProvider modelTop = Model.texturedModelAll("lotus:block/slab_top_all", texture, "${id}:${name}_top");
-		ModelProvider modelDouble = Model.texturedModelAll("minecraft:block/cube_all", texture, "${id}:${name}_double");
+		ModelProvider modelBottom = Model.texturedModelAll("lotus:block/slab_bottom_all", texture, "${id}:block/${name}_bottom");
+		ModelProvider modelTop = Model.texturedModelAll("lotus:block/slab_top_all", texture, "${id}:block/${name}_top");
+		ModelProvider modelDouble = Model.texturedModelAll("minecraft:block/cube_all", texture, "${id}:block/${name}_double");
 
 		return Model.variant()
 				.when("type", "bottom").model(modelBottom).pop().pop()
@@ -40,9 +53,9 @@ public class Models {
 	 * Create a simple stair model factory that uses the given texture pattern for all sides
 	 */
 	public static ApplicableFactory texturedStairOf(String texture) {
-		ModelProvider modelStraight = Model.texturedModelAll("lotus:block/stairs_all", texture, "${id}:${name}");
-		ModelProvider modelInner = Model.texturedModelAll("lotus:block/inner_stairs_all", texture, "${id}:${name}_inner");
-		ModelProvider modelOuter = Model.texturedModelAll("lotus:block/outer_stairs_all", texture, "${id}:${name}_outer");
+		ModelProvider modelStraight = Model.texturedModelAll("lotus:block/stairs_all", texture, "${id}:block/${name}");
+		ModelProvider modelInner = Model.texturedModelAll("lotus:block/inner_stairs_all", texture, "${id}:block/${name}_inner");
+		ModelProvider modelOuter = Model.texturedModelAll("lotus:block/outer_stairs_all", texture, "${id}:block/${name}_outer");
 
 		var variants = Model.variant();
 
