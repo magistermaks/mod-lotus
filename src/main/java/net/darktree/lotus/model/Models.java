@@ -5,6 +5,8 @@ import net.darktree.lotus.model.factory.common.ModelProvider;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.enums.BlockHalf;
 import net.minecraft.block.enums.StairShape;
+import net.minecraft.data.server.recipe.ShapedRecipeJsonFactory;
+import net.minecraft.data.server.recipe.ShapelessRecipeJsonFactory;
 import net.minecraft.state.property.Properties;
 
 public class Models {
@@ -13,12 +15,12 @@ public class Models {
 	public static final ApplicableFactory STAIR = texturedStairOf("${id}:blocks/${name}");
 	public static final ApplicableFactory SLAB = texturedSlabOf("${id}:blocks/${name}");
 	public static final ApplicableFactory ITEM_FLAT = itemGenerated("${id}:items/${name}");
-//	public static final ApplicableFactory ITEM_INHERIT = itemInherit();
+	public static final ApplicableFactory ITEM_INHERIT = itemInherit();
 
-//	public static ApplicableFactory itemInherit() {
-//		return Model.model(ModelProvider.ofName("${id}"))
-//				.get("item/");
-//	}
+	public static ApplicableFactory itemInherit() {
+		return Model.model(ModelProvider.ofName("${id}:block/${name}"))
+				.get("item/");
+	}
 
 	public static ApplicableFactory itemGenerated(String texture) {
 		return Model.model(ModelProvider.ofName("item/generated"))
@@ -38,7 +40,7 @@ public class Models {
 	 * Create a simple slab model factory that uses the given texture pattern for all sides
 	 */
 	public static ApplicableFactory texturedSlabOf(String texture) {
-		ModelProvider modelBottom = Model.texturedModelAll("lotus:block/slab_bottom_all", texture, "${id}:block/${name}_bottom");
+		ModelProvider modelBottom = Model.texturedModelAll("lotus:block/slab_bottom_all", texture, "${id}:block/${name}");
 		ModelProvider modelTop = Model.texturedModelAll("lotus:block/slab_top_all", texture, "${id}:block/${name}_top");
 		ModelProvider modelDouble = Model.texturedModelAll("minecraft:block/cube_all", texture, "${id}:block/${name}_double");
 
@@ -47,6 +49,8 @@ public class Models {
 				.when("type", "top").model(modelTop).pop().pop()
 				.when("type", "double").model(modelDouble).pop().pop()
 				.get();
+
+		ShapedRecipeJsonFactory
 	}
 
 	/**
