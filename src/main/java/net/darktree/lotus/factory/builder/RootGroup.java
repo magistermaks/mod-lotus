@@ -1,5 +1,6 @@
 package net.darktree.lotus.factory.builder;
 
+import net.darktree.interference.api.DefaultLoot;
 import net.darktree.lotus.factory.builder.provider.BlockProvider;
 import net.darktree.lotus.factory.builder.provider.ItemProvider;
 import net.darktree.lotus.factory.builder.provider.LootProvider;
@@ -35,7 +36,7 @@ public class RootGroup extends PropertyProvider {
 	}
 
 	@Override
-	public LootProvider getLootProvider() {
+	public DefaultLoot getLootProvider() {
 		return LootProvider.NONE;
 	}
 

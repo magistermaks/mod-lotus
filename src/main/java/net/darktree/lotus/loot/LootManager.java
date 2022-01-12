@@ -28,18 +28,8 @@ public class LootManager {
         return table == null ? getEmpty() : table.getLoot( random, context );
     }
 
-    public static List<ItemStack> dispatch(BlockState state, net.minecraft.loot.context.LootContext.Builder builder, Identifier vanilla, LootTable custom) {
-
-        net.minecraft.loot.context.LootContext lootContext = builder.parameter(LootContextParameters.BLOCK_STATE, state).build(LootContextTypes.BLOCK);
-        ServerWorld serverWorld = lootContext.getWorld();
-        net.minecraft.loot.LootTable lootTable = serverWorld.getServer().getLootManager().getTable(vanilla);
-
-        if( lootTable == net.minecraft.loot.LootTable.EMPTY ) {
-            return LootManager.getLoot(custom, getLootContext( state, builder ));
-        }else{
-            return serverWorld.getServer().getLootManager().getTable(vanilla).generateLoot(lootContext);
-        }
-
+    public static List<ItemStack> dispatch(BlockState state, net.minecraft.loot.context.LootContext.Builder builder, LootTable custom) {
+        return LootManager.getLoot(custom, getLootContext( state, builder ));
     }
 
     private static LootContext getLootContext( BlockState state, net.minecraft.loot.context.LootContext.Builder builder ) {

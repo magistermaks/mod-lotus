@@ -4,6 +4,7 @@ import com.sun.xml.internal.ws.api.policy.ModelGenerator;
 import net.darktree.lotus.factory.Factory;
 import net.darktree.lotus.factory.builder.old.variant.VariantIterator;
 import net.darktree.lotus.factory.builder.provider.BlockProvider;
+import net.darktree.lotus.loot.LootManager;
 import net.darktree.lotus.model.Models;
 import net.darktree.lotus.recipe.Recipe;
 import net.fabricmc.api.ModInitializer;

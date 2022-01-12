@@ -1,6 +1,7 @@
 package net.darktree.lotus.factory.builder;
 
 import net.darktree.interference.LootInjector;
+import net.darktree.interference.api.DefaultLoot;
 import net.darktree.lotus.factory.builder.provider.*;
 import net.darktree.lotus.model.factory.ApplicableFactory;
 import net.darktree.lotus.recipe.RecipeBuilder;
@@ -36,9 +37,9 @@ public class BlockBuilder extends PropertyProvider {
 		Registry.register(Registry.BLOCK, id, block);
 
 		// attach loot provider
-		LootProvider lootProvider = getLootProvider();
+		DefaultLoot lootProvider = getLootProvider();
 		if(lootProvider != null) {
-			LootInjector.inject(id, lootProvider.provider());
+			LootInjector.inject(id, lootProvider);
 		}
 
 		// attach block model
@@ -90,6 +91,11 @@ public class BlockBuilder extends PropertyProvider {
 	}
 
 	public BlockBuilder drop(LootProvider provider) {
+		this.lootProvider = provider.provider();
+		return this;
+	}
+
+	public BlockBuilder drop(DefaultLoot provider) {
 		this.lootProvider = provider;
 		return this;
 	}

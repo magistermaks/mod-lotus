@@ -1,8 +1,8 @@
 package net.darktree.lotus.factory.builder;
 
+import net.darktree.interference.api.DefaultLoot;
 import net.darktree.lotus.factory.builder.provider.BlockProvider;
 import net.darktree.lotus.factory.builder.provider.ItemProvider;
-import net.darktree.lotus.factory.builder.provider.LootProvider;
 import net.darktree.lotus.factory.builder.provider.RecipeProvider;
 import net.darktree.lotus.model.factory.ApplicableFactory;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -15,7 +15,7 @@ public abstract class PropertyProvider {
 	FabricBlockSettings blockSettings = null;
 	FabricItemSettings itemSettings = null;
 	BlockProvider blockProvider = null;
-	LootProvider lootProvider = null;
+	DefaultLoot lootProvider = null;
 	ItemProvider itemProvider = null;
 	RecipeProvider recipeProvider = null;
 	ApplicableFactory blockModelProvider = null;
@@ -40,7 +40,7 @@ public abstract class PropertyProvider {
 		return parent().getBlockProvider();
 	}
 
-	public LootProvider getLootProvider() {
+	public DefaultLoot getLootProvider() {
 		if(this.lootProvider != null) return this.lootProvider;
 		return parent().getLootProvider();
 	}

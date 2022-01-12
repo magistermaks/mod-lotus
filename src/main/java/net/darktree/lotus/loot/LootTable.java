@@ -1,5 +1,7 @@
 package net.darktree.lotus.loot;
 
+import net.darktree.interference.api.DefaultLoot;
+import net.darktree.lotus.factory.builder.provider.LootProvider;
 import net.darktree.lotus.loot.entry.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -127,8 +129,8 @@ public class LootTable {
         return this;
     }
 
-    public LootTable build() {
-        return this;
+    public DefaultLoot build() {
+        return LootProvider.of(this);
     }
 
     private int countItems( ArrayList<ItemStack> stacks ) {
